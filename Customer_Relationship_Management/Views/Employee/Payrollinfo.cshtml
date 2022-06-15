@@ -1,0 +1,68 @@
+﻿@model PagedList.IPagedList<Customer_Relationship_Management.Models.PayRoll>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "Payrollinfo";
+    Layout = "/Views/Shared/_Employee.cshtml";
+    if (Session["UserName"] == null)
+    {
+        Response.Redirect("~/Login/Login");
+    }
+}
+
+<h2>Employee Database</h2>
+@Html.AntiForgeryToken()
+
+@using (Html.BeginForm())
+{
+    <p>
+        <b> Search by</b>
+        @Html.RadioButton("Search_Data", "Empid") <b> EmployeeId</b><br />
+    </p>
+    <p>
+        Enter Name/ID: &nbsp;&nbsp;@Html.TextBox("Search")
+        <input type="submit" value="Find" class="btn btn-primary" />
+    </p>
+
+}
+<br>
+<table class="table">
+    <tr>
+       
+        <th>
+            @Html.ActionLink("Emp_Id", "Payrollinfo", new { Sorting_Order = ViewBag.SortingEmp_Id, Filter_Value = ViewBag.FilterValue })
+        </th>
+
+        <th>
+            @Html.ActionLink("ClassType", "Payrollinfo", new { Sorting_Order = ViewBag.SortingClassType, Filter_Value = ViewBag.FilterValue })
+        </th>
+
+        <th>
+            @Html.ActionLink("Totalsalary", "Payrollinfo", new { Sorting_Order = ViewBag.Totalsalary, Filter_Value = ViewBag.FilterValue })
+        </th>
+
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            
+            <td>
+                @Html.DisplayFor(model => item.Emp_Id)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassType)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Totalsalary)
+            </td>
+
+        </tr>
+    }
+</table>
+
+    Page@(Model.PageCount <Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount @Html.PagedListPager(Model, Page_No => Url.Action("CustomerList", new { Page_No, Sorting_Order = ViewBag.CurrentSortOrder, Filter_Value = ViewBag.FilterValue }))
+    @Html.ActionLink("Back to Dashboard", "Dashboard")

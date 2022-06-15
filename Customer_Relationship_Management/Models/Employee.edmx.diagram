@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7599325eaf234b37a639bde18966cf05" Name="Diagram1">
+        <EntityTypeShape EntityType="CRMModel1.Admin" Width="1.5" PointX="10.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel1.AdminCustomer" Width="1.5" PointX="7.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel1.AdminEmployee" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel1.customer" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel1.employee" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel1.PayRoll" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel1.query" Width="1.5" PointX="8" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel1.Request" Width="1.5" PointX="8" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel1.Roletype" Width="1.5" PointX="10.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel1.salary" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel1.Signup" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel1.Signupcustomer" Width="1.5" PointX="10" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="CRMModel1.FK__Signupcus__RoleN__4119A21D" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel1.FK__employees__Emplo__1DD065E0" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel1.FK__Signup__RoleName__7E57BA87" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel1.FK__queries__custId__33BFA6FF" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel1.FK__Request__custId__5614BF03" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel1.FK__PayRoll__Emp_Id__6EE06CCD" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel1.FK__PayRoll__ClassTy__6FD49106" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,671 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CRMModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="AdminCustomer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="EmployeeId" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="AdminEmployee">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="ClassType" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Department" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="customers">
+          <Key>
+            <PropertyRef Name="customerId" />
+          </Key>
+          <Property Name="customerId" Type="int" Nullable="false" />
+          <Property Name="customerName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="phone" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="contactaddress" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="employees">
+          <Key>
+            <PropertyRef Name="Employee_Id" />
+          </Key>
+          <Property Name="Employee_Id" Type="int" Nullable="false" />
+          <Property Name="Firstname" Type="varchar" MaxLength="30" />
+          <Property Name="Lastname" Type="varchar" MaxLength="30" />
+          <Property Name="MailId" Type="varchar" MaxLength="30" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="10" />
+          <Property Name="DateofBirth" Type="date" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PayRoll">
+          <Key>
+            <PropertyRef Name="PayrollId" />
+          </Key>
+          <Property Name="PayrollId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Emp_Id" Type="int" />
+          <Property Name="ClassType" Type="varchar" MaxLength="20" />
+          <Property Name="Totalsalary" Type="int" />
+        </EntityType>
+        <EntityType Name="queries">
+          <Key>
+            <PropertyRef Name="Queryno" />
+          </Key>
+          <Property Name="Queryno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="custId" Type="int" Nullable="false" />
+          <Property Name="custname" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="custEmail" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="EmpId" Type="int" Nullable="false" />
+          <Property Name="Qsubject" Type="varchar" MaxLength="50" />
+          <Property Name="Qmessage" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Request">
+          <Key>
+            <PropertyRef Name="Requestno" />
+          </Key>
+          <Property Name="Requestno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="custId" Type="int" Nullable="false" />
+          <Property Name="custname" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="custEmail" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="EmpId" Type="int" Nullable="false" />
+          <Property Name="subject" Type="varchar" MaxLength="50" />
+          <Property Name="message" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roletype">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="salary">
+          <Key>
+            <PropertyRef Name="Class" />
+          </Key>
+          <Property Name="salaryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Class" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="amount" Type="int" />
+          <Property Name="annual" Type="int" />
+        </EntityType>
+        <EntityType Name="Signup">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Createddate" Type="date" />
+          <Property Name="RoleName" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Signupcustomer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Createddate" Type="date" />
+          <Property Name="RoleName" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK__employees__Emplo__1DD065E0">
+          <End Role="AdminEmployee" Type="Self.AdminEmployee" Multiplicity="1" />
+          <End Role="employees" Type="Self.employees" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AdminEmployee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="employees">
+              <PropertyRef Name="Employee_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PayRoll__ClassTy__6FD49106">
+          <End Role="salary" Type="Self.salary" Multiplicity="0..1" />
+          <End Role="PayRoll" Type="Self.PayRoll" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="salary">
+              <PropertyRef Name="Class" />
+            </Principal>
+            <Dependent Role="PayRoll">
+              <PropertyRef Name="ClassType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PayRoll__Emp_Id__6EE06CCD">
+          <End Role="employees" Type="Self.employees" Multiplicity="0..1" />
+          <End Role="PayRoll" Type="Self.PayRoll" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="Employee_Id" />
+            </Principal>
+            <Dependent Role="PayRoll">
+              <PropertyRef Name="Emp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__queries__custId__33BFA6FF">
+          <End Role="customers" Type="Self.customers" Multiplicity="1" />
+          <End Role="queries" Type="Self.queries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customers">
+              <PropertyRef Name="customerId" />
+            </Principal>
+            <Dependent Role="queries">
+              <PropertyRef Name="custId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Request__custId__5614BF03">
+          <End Role="customers" Type="Self.customers" Multiplicity="1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customers">
+              <PropertyRef Name="customerId" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="custId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Signup__RoleName__7E57BA87">
+          <End Role="AdminEmployee" Type="Self.AdminEmployee" Multiplicity="0..1" />
+          <End Role="Signup" Type="Self.Signup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdminEmployee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Signup">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Signupcus__RoleN__4119A21D">
+          <End Role="AdminCustomer" Type="Self.AdminCustomer" Multiplicity="0..1" />
+          <End Role="Signupcustomer" Type="Self.Signupcustomer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdminCustomer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Signupcustomer">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CRMModel1StoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdminCustomer" EntityType="Self.AdminCustomer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdminEmployee" EntityType="Self.AdminEmployee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="customers" EntityType="Self.customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="employees" EntityType="Self.employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PayRoll" EntityType="Self.PayRoll" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="queries" EntityType="Self.queries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Request" EntityType="Self.Request" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roletype" EntityType="Self.Roletype" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="salary" EntityType="Self.salary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Signup" EntityType="Self.Signup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Signupcustomer" EntityType="Self.Signupcustomer" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__employees__Emplo__1DD065E0" Association="Self.FK__employees__Emplo__1DD065E0">
+            <End Role="AdminEmployee" EntitySet="AdminEmployee" />
+            <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PayRoll__ClassTy__6FD49106" Association="Self.FK__PayRoll__ClassTy__6FD49106">
+            <End Role="salary" EntitySet="salary" />
+            <End Role="PayRoll" EntitySet="PayRoll" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PayRoll__Emp_Id__6EE06CCD" Association="Self.FK__PayRoll__Emp_Id__6EE06CCD">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="PayRoll" EntitySet="PayRoll" />
+          </AssociationSet>
+          <AssociationSet Name="FK__queries__custId__33BFA6FF" Association="Self.FK__queries__custId__33BFA6FF">
+            <End Role="customers" EntitySet="customers" />
+            <End Role="queries" EntitySet="queries" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Request__custId__5614BF03" Association="Self.FK__Request__custId__5614BF03">
+            <End Role="customers" EntitySet="customers" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Signup__RoleName__7E57BA87" Association="Self.FK__Signup__RoleName__7E57BA87">
+            <End Role="AdminEmployee" EntitySet="AdminEmployee" />
+            <End Role="Signup" EntitySet="Signup" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Signupcus__RoleN__4119A21D" Association="Self.FK__Signupcus__RoleN__4119A21D">
+            <End Role="AdminCustomer" EntitySet="AdminCustomer" />
+            <End Role="Signupcustomer" EntitySet="Signupcustomer" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CRMModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AdminCustomer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeId" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Signupcustomers" Relationship="Self.FK__Signupcus__RoleN__4119A21D" FromRole="AdminCustomer" ToRole="Signupcustomer" />
+        </EntityType>
+        <EntityType Name="AdminEmployee">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="ClassType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Department" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="employee" Relationship="Self.FK__employees__Emplo__1DD065E0" FromRole="AdminEmployee" ToRole="employees" />
+          <NavigationProperty Name="Signups" Relationship="Self.FK__Signup__RoleName__7E57BA87" FromRole="AdminEmployee" ToRole="Signup" />
+        </EntityType>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="customerId" />
+          </Key>
+          <Property Name="customerId" Type="Int32" Nullable="false" />
+          <Property Name="customerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contactaddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="queries" Relationship="Self.FK__queries__custId__33BFA6FF" FromRole="customers" ToRole="queries" />
+          <NavigationProperty Name="Requests" Relationship="Self.FK__Request__custId__5614BF03" FromRole="customers" ToRole="Request" />
+        </EntityType>
+        <EntityType Name="employee">
+          <Key>
+            <PropertyRef Name="Employee_Id" />
+          </Key>
+          <Property Name="Employee_Id" Type="Int32" Nullable="false" />
+          <Property Name="Firstname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Lastname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="MailId" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="DateofBirth" Type="DateTime" Precision="0" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AdminEmployee" Relationship="Self.FK__employees__Emplo__1DD065E0" FromRole="employees" ToRole="AdminEmployee" />
+          <NavigationProperty Name="PayRolls" Relationship="Self.FK__PayRoll__Emp_Id__6EE06CCD" FromRole="employees" ToRole="PayRoll" />
+        </EntityType>
+        <EntityType Name="PayRoll">
+          <Key>
+            <PropertyRef Name="PayrollId" />
+          </Key>
+          <Property Name="PayrollId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Emp_Id" Type="Int32" />
+          <Property Name="ClassType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Totalsalary" Type="Int32" />
+          <NavigationProperty Name="employee" Relationship="Self.FK__PayRoll__Emp_Id__6EE06CCD" FromRole="PayRoll" ToRole="employees" />
+          <NavigationProperty Name="salary" Relationship="Self.FK__PayRoll__ClassTy__6FD49106" FromRole="PayRoll" ToRole="salary" />
+        </EntityType>
+        <EntityType Name="query">
+          <Key>
+            <PropertyRef Name="Queryno" />
+          </Key>
+          <Property Name="Queryno" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="custId" Type="Int32" Nullable="false" />
+          <Property Name="custname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="custEmail" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmpId" Type="Int32" Nullable="false" />
+          <Property Name="Qsubject" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Qmessage" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="customer" Relationship="Self.FK__queries__custId__33BFA6FF" FromRole="queries" ToRole="customers" />
+        </EntityType>
+        <EntityType Name="Request">
+          <Key>
+            <PropertyRef Name="Requestno" />
+          </Key>
+          <Property Name="Requestno" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="custId" Type="Int32" Nullable="false" />
+          <Property Name="custname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="custEmail" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmpId" Type="Int32" Nullable="false" />
+          <Property Name="subject" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="message" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="customer" Relationship="Self.FK__Request__custId__5614BF03" FromRole="Request" ToRole="customers" />
+        </EntityType>
+        <EntityType Name="Roletype">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="salary">
+          <Key>
+            <PropertyRef Name="Class" />
+          </Key>
+          <Property Name="salaryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Class" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="amount" Type="Int32" />
+          <Property Name="annual" Type="Int32" />
+          <NavigationProperty Name="PayRolls" Relationship="Self.FK__PayRoll__ClassTy__6FD49106" FromRole="salary" ToRole="PayRoll" />
+        </EntityType>
+        <EntityType Name="Signup">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Createddate" Type="DateTime" Precision="0" />
+          <Property Name="RoleName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AdminEmployee" Relationship="Self.FK__Signup__RoleName__7E57BA87" FromRole="Signup" ToRole="AdminEmployee" />
+        </EntityType>
+        <EntityType Name="Signupcustomer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Createddate" Type="DateTime" Precision="0" />
+          <Property Name="RoleName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AdminCustomer" Relationship="Self.FK__Signupcus__RoleN__4119A21D" FromRole="Signupcustomer" ToRole="AdminCustomer" />
+        </EntityType>
+        <Association Name="FK__Signupcus__RoleN__4119A21D">
+          <End Role="AdminCustomer" Type="Self.AdminCustomer" Multiplicity="0..1" />
+          <End Role="Signupcustomer" Type="Self.Signupcustomer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdminCustomer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="Signupcustomer">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__employees__Emplo__1DD065E0">
+          <End Role="AdminEmployee" Type="Self.AdminEmployee" Multiplicity="1" />
+          <End Role="employees" Type="Self.employee" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AdminEmployee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="employees">
+              <PropertyRef Name="Employee_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Signup__RoleName__7E57BA87">
+          <End Role="AdminEmployee" Type="Self.AdminEmployee" Multiplicity="0..1" />
+          <End Role="Signup" Type="Self.Signup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdminEmployee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Signup">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__queries__custId__33BFA6FF">
+          <End Role="customers" Type="Self.customer" Multiplicity="1" />
+          <End Role="queries" Type="Self.query" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customers">
+              <PropertyRef Name="customerId" />
+            </Principal>
+            <Dependent Role="queries">
+              <PropertyRef Name="custId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Request__custId__5614BF03">
+          <End Role="customers" Type="Self.customer" Multiplicity="1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customers">
+              <PropertyRef Name="customerId" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="custId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PayRoll__Emp_Id__6EE06CCD">
+          <End Role="employees" Type="Self.employee" Multiplicity="0..1" />
+          <End Role="PayRoll" Type="Self.PayRoll" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="Employee_Id" />
+            </Principal>
+            <Dependent Role="PayRoll">
+              <PropertyRef Name="Emp_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PayRoll__ClassTy__6FD49106">
+          <End Role="salary" Type="Self.salary" Multiplicity="0..1" />
+          <End Role="PayRoll" Type="Self.PayRoll" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="salary">
+              <PropertyRef Name="Class" />
+            </Principal>
+            <Dependent Role="PayRoll">
+              <PropertyRef Name="ClassType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EmpEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admins" EntityType="Self.Admin" />
+          <EntitySet Name="AdminCustomers" EntityType="Self.AdminCustomer" />
+          <EntitySet Name="AdminEmployees" EntityType="Self.AdminEmployee" />
+          <EntitySet Name="customers" EntityType="Self.customer" />
+          <EntitySet Name="employees" EntityType="Self.employee" />
+          <EntitySet Name="PayRolls" EntityType="Self.PayRoll" />
+          <EntitySet Name="queries" EntityType="Self.query" />
+          <EntitySet Name="Requests" EntityType="Self.Request" />
+          <EntitySet Name="Roletypes" EntityType="Self.Roletype" />
+          <EntitySet Name="salaries" EntityType="Self.salary" />
+          <EntitySet Name="Signups" EntityType="Self.Signup" />
+          <EntitySet Name="Signupcustomers" EntityType="Self.Signupcustomer" />
+          <AssociationSet Name="FK__Signupcus__RoleN__4119A21D" Association="Self.FK__Signupcus__RoleN__4119A21D">
+            <End Role="AdminCustomer" EntitySet="AdminCustomers" />
+            <End Role="Signupcustomer" EntitySet="Signupcustomers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__employees__Emplo__1DD065E0" Association="Self.FK__employees__Emplo__1DD065E0">
+            <End Role="AdminEmployee" EntitySet="AdminEmployees" />
+            <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Signup__RoleName__7E57BA87" Association="Self.FK__Signup__RoleName__7E57BA87">
+            <End Role="AdminEmployee" EntitySet="AdminEmployees" />
+            <End Role="Signup" EntitySet="Signups" />
+          </AssociationSet>
+          <AssociationSet Name="FK__queries__custId__33BFA6FF" Association="Self.FK__queries__custId__33BFA6FF">
+            <End Role="customers" EntitySet="customers" />
+            <End Role="queries" EntitySet="queries" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Request__custId__5614BF03" Association="Self.FK__Request__custId__5614BF03">
+            <End Role="customers" EntitySet="customers" />
+            <End Role="Request" EntitySet="Requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PayRoll__Emp_Id__6EE06CCD" Association="Self.FK__PayRoll__Emp_Id__6EE06CCD">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="PayRoll" EntitySet="PayRolls" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PayRoll__ClassTy__6FD49106" Association="Self.FK__PayRoll__ClassTy__6FD49106">
+            <End Role="salary" EntitySet="salaries" />
+            <End Role="PayRoll" EntitySet="PayRolls" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CRMModel1StoreContainer" CdmEntityContainer="EmpEntities">
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="CRMModel1.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdminCustomers">
+            <EntityTypeMapping TypeName="CRMModel1.AdminCustomer">
+              <MappingFragment StoreEntitySet="AdminCustomer">
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdminEmployees">
+            <EntityTypeMapping TypeName="CRMModel1.AdminEmployee">
+              <MappingFragment StoreEntitySet="AdminEmployee">
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="ClassType" ColumnName="ClassType" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="customers">
+            <EntityTypeMapping TypeName="CRMModel1.customer">
+              <MappingFragment StoreEntitySet="customers">
+                <ScalarProperty Name="customerId" ColumnName="customerId" />
+                <ScalarProperty Name="customerName" ColumnName="customerName" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="contactaddress" ColumnName="contactaddress" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="employees">
+            <EntityTypeMapping TypeName="CRMModel1.employee">
+              <MappingFragment StoreEntitySet="employees">
+                <ScalarProperty Name="Employee_Id" ColumnName="Employee_Id" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="MailId" ColumnName="MailId" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DateofBirth" ColumnName="DateofBirth" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PayRolls">
+            <EntityTypeMapping TypeName="CRMModel1.PayRoll">
+              <MappingFragment StoreEntitySet="PayRoll">
+                <ScalarProperty Name="PayrollId" ColumnName="PayrollId" />
+                <ScalarProperty Name="Emp_Id" ColumnName="Emp_Id" />
+                <ScalarProperty Name="ClassType" ColumnName="ClassType" />
+                <ScalarProperty Name="Totalsalary" ColumnName="Totalsalary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="queries">
+            <EntityTypeMapping TypeName="CRMModel1.query">
+              <MappingFragment StoreEntitySet="queries">
+                <ScalarProperty Name="Queryno" ColumnName="Queryno" />
+                <ScalarProperty Name="custId" ColumnName="custId" />
+                <ScalarProperty Name="custname" ColumnName="custname" />
+                <ScalarProperty Name="custEmail" ColumnName="custEmail" />
+                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+                <ScalarProperty Name="Qsubject" ColumnName="Qsubject" />
+                <ScalarProperty Name="Qmessage" ColumnName="Qmessage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Requests">
+            <EntityTypeMapping TypeName="CRMModel1.Request">
+              <MappingFragment StoreEntitySet="Request">
+                <ScalarProperty Name="Requestno" ColumnName="Requestno" />
+                <ScalarProperty Name="custId" ColumnName="custId" />
+                <ScalarProperty Name="custname" ColumnName="custname" />
+                <ScalarProperty Name="custEmail" ColumnName="custEmail" />
+                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+                <ScalarProperty Name="subject" ColumnName="subject" />
+                <ScalarProperty Name="message" ColumnName="message" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roletypes">
+            <EntityTypeMapping TypeName="CRMModel1.Roletype">
+              <MappingFragment StoreEntitySet="Roletype">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="salaries">
+            <EntityTypeMapping TypeName="CRMModel1.salary">
+              <MappingFragment StoreEntitySet="salary">
+                <ScalarProperty Name="salaryId" ColumnName="salaryId" />
+                <ScalarProperty Name="Class" ColumnName="Class" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="annual" ColumnName="annual" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Signups">
+            <EntityTypeMapping TypeName="CRMModel1.Signup">
+              <MappingFragment StoreEntitySet="Signup">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Createddate" ColumnName="Createddate" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Signupcustomers">
+            <EntityTypeMapping TypeName="CRMModel1.Signupcustomer">
+              <MappingFragment StoreEntitySet="Signupcustomer">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Createddate" ColumnName="Createddate" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

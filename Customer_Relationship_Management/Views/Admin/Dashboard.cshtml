@@ -1,0 +1,27 @@
+﻿@model PagedList.IPagedList<Customer_Relationship_Management.Models.customer>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "/Views/Shared/_Admin.cshtml";
+    if (Session["UserName"] == null)
+    {
+        Response.Redirect("~/Admin/Login");
+    }
+}
+
+<h2>Dashboard</h2>
+@Html.AntiForgeryToken()
+<div class="btn btn-group-vertical">
+    <input type="button" class="btn btn-primary btn-lg" value=" Admin Profile" onclick="window.location= '@Url.Action( "Profile", "Admin")'" />
+    <input type="button" class="btn btn-primary btn-lg" value="Add Customer" onclick="window.location= '@Url.Action( "CustomerCtrl", "Admin")'" />
+    <input type="button" class="btn btn-primary btn-lg" value="Add Employee" onclick="window.location= '@Url.Action( "EmployeeCtrl", "Admin")'" />
+    <input type="button" class="btn btn-primary btn-lg" value="Employee PayRoll" onclick="window.location= '@Url.Action( "empPayroll", "Admin")'" />
+    <input type="button" class="btn btn-primary btn-lg" value="Employee Id and Class Allotment" onclick="window.location= '@Url.Action( "Allotment", "Admin")'" />
+    <input type="button" class="btn btn-primary btn-lg" value="CustomerId and Employee Allotment" onclick="window.location= '@Url.Action( "CustomerAllotment", "Admin")'" />
+    <input type="button" class="btn btn-primary btn-lg" value="Customer and Employee Assign Update" onclick="window.location= '@Url.Action( "EmptoCust", "Admin")'" />
+</div>
+<div class="pull-right">
+   
+</div>

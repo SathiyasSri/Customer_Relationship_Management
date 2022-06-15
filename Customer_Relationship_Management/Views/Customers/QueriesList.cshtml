@@ -1,0 +1,88 @@
+﻿@model IEnumerable<Customer_Relationship_Management.Models.query>
+@{
+    ViewBag.Title = "QueriesList";
+    Layout = "~/Views/Shared/_Customer.cshtml";
+}
+
+<table class="table table-responsive">
+    <p>
+        <a href="~/Customers/Queries" class="btn btn-primary">Ask Queries</a>
+    </p>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.custId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.custname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.custEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmpId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Qsubject)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Qmessage)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.custId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.custname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.custEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Qsubject)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Qmessage)
+            </td>
+
+            <td>
+                <a href="~/Customers/QDelete/@item.Queryno" class="btn btn-primary a-btn-slide-text">
+                    <span class="glyphicon glyphicon-edit"></span>
+                    <span><strong>Delete</strong></span>
+                </a>
+            </td>
+
+        </tr>
+    }
+</table>
+@{
+    try
+    {
+        if (TempData["Qmsg1"] != null)
+        {
+            <script>
+                swal("Message sent", "click OK to continue");
+            </script>
+        }
+        else if (TempData["Qmsg2"] != null)
+        {
+            <script>
+                swal("try again...", "click OK to continue");
+            </script>
+
+        }
+    }
+    catch { }
+}
+
+
+<div>
+    @Html.ActionLink("Back", "Index")
+</div>

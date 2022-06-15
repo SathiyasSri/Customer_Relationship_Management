@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "/Views/Shared/_Manager.cshtml";
+    if (Session["UserName"] == null)
+    {
+        Response.Redirect("~/Roll/Index");
+    }
+}
+
+<h2>Manager Dashboard</h2>
+
+<h2>Dashboard</h2>
+@Html.AntiForgeryToken()
+<div class="btn btn-group-vertical">
+    <input type="button" class="btn btn-primary btn-lg" value="Profile" onclick="window.location= '@Url.Action( "Profile", "Manager")'" />
+    <input type="button" class="btn btn-primary btn-lg" value="View Employee" onclick="window.location= '@Url.Action( "EmployeeCtrl", "Manager")'" />
+    <input type="button" class="btn btn-primary btn-lg" value="View Customer" onclick="window.location= '@Url.Action( "Customerctrl", "Manager")'" />
+    <input type="button" class="btn btn-primary btn-lg" value="PayRoll" onclick="window.location= '@Url.Action( "Payrollinfo", "Manager")'" />
+</div>
+<div class="pull-right">
+
+</div>

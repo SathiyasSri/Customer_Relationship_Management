@@ -1,0 +1,78 @@
+﻿@model PagedList.IPagedList<Customer_Relationship_Management.Models.customer>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "CustomerList";
+}
+
+<h2>CustomerList</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@using (Html.BeginForm("CustomerList", "Employee", FormMethod.Get))
+{
+    <p>
+        Enter CustomerId:@Html.TextBox("Search_Data", ViewBag.FilterValue as string)
+        <input type="submit" value="Find" />
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("CustomerId", "CustomerList", new { Sorting_Order = ViewBag.CustomerId, Filter_Value = ViewBag.FilterValue })
+        </th>
+
+        <th>
+            @Html.ActionLink("customerName", "CustomerList", new { Sorting_Order = ViewBag.SortingName, Filter_Value = ViewBag.FilterValue })
+        </th>
+
+        <th>
+            @Html.ActionLink("phone", "CustomerList", new { Sorting_Order = ViewBag.SortingPhone, Filter_Value = ViewBag.FilterValue })
+        </th>
+
+        <th>
+            @Html.ActionLink("email", "CustomerList", new { Sorting_Order = ViewBag.SortingEmail, Filter_Value = ViewBag.FilterValue })
+        </th>
+
+        <th>
+            @Html.ActionLink("contactaddress", "CustomerList", new { Sorting_Order = ViewBag.SortingAddress, Filter_Value = ViewBag.FilterValue })
+        </th>
+
+        <th>
+            @Html.ActionLink("EmployeeId", "CustomerList", new { Sorting_Order = ViewBag.SortingEmpid, Filter_Value = ViewBag.FilterValue })
+        </th>
+    </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.customerId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.customerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.contactaddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeId)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.customerId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.customerId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.customerId })
+                </td>
+            </tr>
+        }
+    </table>
+
+    Page@(Model.PageCount <Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount @Html.PagedListPager(Model, Page_No => Url.Action("CustomerList", new { Page_No, Sorting_Order = ViewBag.CurrentSortOrder, Filter_Value = ViewBag.FilterValue }))

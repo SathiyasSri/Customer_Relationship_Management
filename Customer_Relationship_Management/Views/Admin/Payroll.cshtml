@@ -1,0 +1,62 @@
+﻿@model Customer_Relationship_Management.Models.PayRoll
+
+@{
+    ViewBag.Title = "Payroll";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+    if (Session["UserName"] == null)
+    {
+        Response.Redirect("~/Login/Login");
+    }
+}
+
+<h2>Payroll</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>PayRoll</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Emp_Id, "Emp_Id", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Emp_Id, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Emp_Id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ClassType, "ClassType", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ClassType, new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.DropDownListFor(model => model.ClassType, (IEnumerable<SelectListItem>)ViewBag.ClassList as SelectList, "--Select--", htmlAttributes: new { @class = "form-control" })*@
+                @Html.ValidationMessageFor(model => model.ClassType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Totalsalary, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Totalsalary, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Totalsalary, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back", "Dashboard")
+</div>
+@{
+    <p style="color:red">
+        <label> @ViewBag.allotduplicate</label>
+    </p>
+}

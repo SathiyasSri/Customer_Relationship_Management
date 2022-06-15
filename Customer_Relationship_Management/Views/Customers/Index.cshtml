@@ -1,0 +1,19 @@
+﻿@model Customer_Relationship_Management.Models.Request
+
+@{
+    ViewBag.Title = "RDelete";
+    Layout = "~/Views/Shared/_Customer.cshtml";
+    if (Session["UserName"] == null)
+    {
+        Response.Redirect("~/Login/Login");
+    }
+}
+<h1>Welcome</h1>
+<p> Register here</p>
+<div class="btn btn-group-vertical">
+    <input type="button" class="btn btn-primary" value="Register" onclick="window.location= '@Url.Action( "Registration", "Customers")'" />
+    <input type="button" class="btn btn-primary" value="Customer Request" onclick="window.location= '@Url.Action( "Customerreq", "Customers")'" />
+    <input type="button" class="btn btn-primary" value="Request List" onclick="window.location= '@Url.Action( "Requestlist", "Customers")'" />
+    <input type="button" class="btn btn-primary" value="Send Queries" onclick="window.location= '@Url.Action( "Queries", "Customers")'" />
+    <input type="button" class="btn btn-primary" value="QueryList" onclick="window.location= '@Url.Action( "QueriesList", "Customers")'" />
+</div>

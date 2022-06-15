@@ -1,0 +1,263 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CRMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="customers">
+          <Key>
+            <PropertyRef Name="customerId" />
+          </Key>
+          <Property Name="customerId" Type="int" Nullable="false" />
+          <Property Name="customerName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="phone" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="contactaddress" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="queries">
+          <Key>
+            <PropertyRef Name="Queryno" />
+          </Key>
+          <Property Name="Queryno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="custId" Type="int" Nullable="false" />
+          <Property Name="custname" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="custEmail" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="EmpId" Type="int" Nullable="false" />
+          <Property Name="Qsubject" Type="varchar" MaxLength="50" />
+          <Property Name="Qmessage" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Request">
+          <Key>
+            <PropertyRef Name="Requestno" />
+          </Key>
+          <Property Name="Requestno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="custId" Type="int" Nullable="false" />
+          <Property Name="custname" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="custEmail" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="EmpId" Type="int" Nullable="false" />
+          <Property Name="subject" Type="varchar" MaxLength="50" />
+          <Property Name="message" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Signupcustomer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Createddate" Type="date" />
+          <Property Name="RoleName" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK__queries__custId__33BFA6FF">
+          <End Role="customers" Type="Self.customers" Multiplicity="1" />
+          <End Role="queries" Type="Self.queries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customers">
+              <PropertyRef Name="customerId" />
+            </Principal>
+            <Dependent Role="queries">
+              <PropertyRef Name="custId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Request__custId__5614BF03">
+          <End Role="customers" Type="Self.customers" Multiplicity="1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customers">
+              <PropertyRef Name="customerId" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="custId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CRMModelStoreContainer">
+          <EntitySet Name="customers" EntityType="Self.customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="queries" EntityType="Self.queries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Request" EntityType="Self.Request" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Signupcustomer" EntityType="Self.Signupcustomer" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__queries__custId__33BFA6FF" Association="Self.FK__queries__custId__33BFA6FF">
+            <End Role="customers" EntitySet="customers" />
+            <End Role="queries" EntitySet="queries" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Request__custId__5614BF03" Association="Self.FK__Request__custId__5614BF03">
+            <End Role="customers" EntitySet="customers" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CRMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="customerId" />
+          </Key>
+          <Property Name="customerId" Type="Int32" Nullable="false" />
+          <Property Name="customerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contactaddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="queries" Relationship="CRMModel.FK__queries__custId__33BFA6FF" FromRole="customer" ToRole="query" />
+          <NavigationProperty Name="Requests" Relationship="CRMModel.FK__Request__custId__5614BF03" FromRole="customer" ToRole="Request" />
+        </EntityType>
+        <EntityContainer Name="CustomerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="customers" EntityType="Self.customer" />
+          <EntitySet Name="queries" EntityType="CRMModel.query" />
+          <AssociationSet Name="FK__queries__custId__33BFA6FF" Association="CRMModel.FK__queries__custId__33BFA6FF">
+            <End Role="customer" EntitySet="customers" />
+            <End Role="query" EntitySet="queries" />
+          </AssociationSet>
+          <EntitySet Name="Signupcustomers" EntityType="CRMModel.Signupcustomer" />
+          <EntitySet Name="Requests" EntityType="CRMModel.Request" />
+          <AssociationSet Name="FK__Request__custId__5614BF03" Association="CRMModel.FK__Request__custId__5614BF03">
+            <End Role="customer" EntitySet="customers" />
+            <End Role="Request" EntitySet="Requests" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="query">
+          <Key>
+            <PropertyRef Name="Queryno" />
+          </Key>
+          <Property Name="Queryno" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="custId" Type="Int32" Nullable="false" />
+          <Property Name="custname" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="custEmail" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="EmpId" Type="Int32" Nullable="false" />
+          <Property Name="Qsubject" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Qmessage" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="customer" Relationship="CRMModel.FK__queries__custId__33BFA6FF" FromRole="query" ToRole="customer" />
+        </EntityType>
+        <Association Name="FK__queries__custId__33BFA6FF">
+          <End Type="CRMModel.customer" Role="customer" Multiplicity="1" />
+          <End Type="CRMModel.query" Role="query" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="customerId" />
+            </Principal>
+            <Dependent Role="query">
+              <PropertyRef Name="custId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Signupcustomer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Createddate" Type="DateTime" Precision="0" />
+          <Property Name="RoleName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Request">
+          <Key>
+            <PropertyRef Name="Requestno" />
+          </Key>
+          <Property Name="Requestno" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="custId" Type="Int32" Nullable="false" />
+          <Property Name="custname" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="custEmail" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="EmpId" Type="Int32" Nullable="false" />
+          <Property Name="subject" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="message" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="customer" Relationship="CRMModel.FK__Request__custId__5614BF03" FromRole="Request" ToRole="customer" />
+        </EntityType>
+        <Association Name="FK__Request__custId__5614BF03">
+          <End Type="CRMModel.customer" Role="customer" Multiplicity="1" />
+          <End Type="CRMModel.Request" Role="Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="customerId" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="custId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CRMModelStoreContainer" CdmEntityContainer="CustomerEntities">
+          <EntitySetMapping Name="customers">
+            <EntityTypeMapping TypeName="CRMModel.customer">
+              <MappingFragment StoreEntitySet="customers">
+                <ScalarProperty Name="customerId" ColumnName="customerId" />
+                <ScalarProperty Name="customerName" ColumnName="customerName" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="contactaddress" ColumnName="contactaddress" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="queries">
+            <EntityTypeMapping TypeName="CRMModel.query">
+              <MappingFragment StoreEntitySet="queries">
+                <ScalarProperty Name="Qmessage" ColumnName="Qmessage" />
+                <ScalarProperty Name="Qsubject" ColumnName="Qsubject" />
+                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+                <ScalarProperty Name="custEmail" ColumnName="custEmail" />
+                <ScalarProperty Name="custname" ColumnName="custname" />
+                <ScalarProperty Name="custId" ColumnName="custId" />
+                <ScalarProperty Name="Queryno" ColumnName="Queryno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Signupcustomers">
+            <EntityTypeMapping TypeName="CRMModel.Signupcustomer">
+              <MappingFragment StoreEntitySet="Signupcustomer">
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="Createddate" ColumnName="Createddate" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Requests">
+            <EntityTypeMapping TypeName="CRMModel.Request">
+              <MappingFragment StoreEntitySet="Request">
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="subject" ColumnName="subject" />
+                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+                <ScalarProperty Name="custEmail" ColumnName="custEmail" />
+                <ScalarProperty Name="custname" ColumnName="custname" />
+                <ScalarProperty Name="custId" ColumnName="custId" />
+                <ScalarProperty Name="Requestno" ColumnName="Requestno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

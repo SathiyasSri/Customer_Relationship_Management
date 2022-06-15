@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Customer_Relationship_Management.Models.Request>
+
+@{
+    ViewBag.Title = "Requestlist";
+    Layout = "~/Views/Shared/_Customer.cshtml";
+    if (Session["UserName"] == null)
+    {
+        Response.Redirect("~/Login/Login");
+    }
+}
+
+<h2>Requestlist</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.custname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.custEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmpId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.subject)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.message)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.customer.customerName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.custname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.custEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmpId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.subject)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.message)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.customer.customerName)
+        </td>
+        <td>
+            @Html.ActionLink("Delete", "RDelete", new { id=item.Requestno })
+        </td>
+    </tr>
+}
+
+</table>
+<div>
+    @Html.ActionLink("Back", "Index")
+</div>

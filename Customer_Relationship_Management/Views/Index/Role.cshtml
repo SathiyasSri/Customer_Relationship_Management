@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "Role";
+}
+
+<h2>Choose your Role to Login</h2>
+
+@using (Html.BeginForm("Role", "Index", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.DropDownList("Role", ViewData["Role"] as List<SelectListItem>)
+    <input type="submit" value="Click Here" class="btn btn-primary"/> 
+    <input type="button" value="CustomerLogin" class="btn btn-primary" onclick="window.location= '@Url.Action( "Login", "Customers")'" />
+}

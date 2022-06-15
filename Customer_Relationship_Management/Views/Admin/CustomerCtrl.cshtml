@@ -1,0 +1,90 @@
+﻿@model PagedList.IPagedList<Customer_Relationship_Management.Models.customer>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "CustomerCtrl";
+    Layout = "/Views/Shared/_Admin.cshtml";
+    if (Session["UserName"] == null)
+    {
+        Response.Redirect("~/Admin/Login");
+    }
+}
+
+<h2>Customer Database</h2>
+
+
+@using (Html.BeginForm("CustomerCtrl", "Admin", FormMethod.Get))
+{
+    @Html.AntiForgeryToken()
+<p>
+    <b> Search by</b>
+    @Html.RadioButton("Search_Data", "Name", true)<b>CustomerName</b>
+    @Html.RadioButton("Search_Data", "Empid") <b> EmployeeId</b><br />
+</p>
+    <p>
+        Enter Name/ID: &nbsp;&nbsp;@Html.TextBox("Search")
+        <input type="submit" value="Find" class="btn btn-primary" />
+        <input type="button" value="Add Customer" class="btn btn-primary" onclick="window.location= '@Url.Action( "CustomerAllotment", "Admin")'" />
+        <input type="button" value="ViewAll" class="btn btn-primary" onclick="window.location= '@Url.Action( "Customerctrl", "Admin")'" />
+    </p>
+   
+}
+<br>
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("CustomerId", "CustomerCtrl", new { Sorting_Order = ViewBag.CustomerId, Filter_Value = ViewBag.FilterValue })
+        </th>
+
+        <th>
+            @Html.ActionLink("customerName", "CustomerCtrl", new { Sorting_Order = ViewBag.SortingName, Filter_Value = ViewBag.FilterValue })
+        </th>
+
+        <th>
+            @Html.ActionLink("phone", "CustomerCtrl", new { Sorting_Order = ViewBag.SortingPhone, Filter_Value = ViewBag.FilterValue })
+        </th>
+
+        <th>
+            @Html.ActionLink("email", "CustomerCtrl", new { Sorting_Order = ViewBag.SortingEmail, Filter_Value = ViewBag.FilterValue })
+        </th>
+
+        <th>
+            @Html.ActionLink("contactaddress", "CustomerCtrl", new { Sorting_Order = ViewBag.SortingAddress, Filter_Value = ViewBag.FilterValue })
+        </th>
+
+        <th>
+            @Html.ActionLink("EmployeeId", "CustomerCtrl", new { Sorting_Order = ViewBag.SortingEmpid, Filter_Value = ViewBag.FilterValue })
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.customerId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.customerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.contactaddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeId)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Update", new { id = item.customerId })
+                @Html.ActionLink("Delete", "Deletecust", new { id = item.customerId})
+            </td>
+        </tr>
+    }
+</table>
+
+    Page@(Model.PageCount <Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount @Html.PagedListPager(Model, Page_No => Url.Action("CustomerCtrl", new { Page_No, Sorting_Order = ViewBag.CurrentSortOrder, Filter_Value = ViewBag.FilterValue }))
+    @Html.ActionLink("Back to Dashboard", "Dashboard")

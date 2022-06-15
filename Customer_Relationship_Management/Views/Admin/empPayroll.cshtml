@@ -1,0 +1,23 @@
+﻿@model PagedList.IPagedList<Customer_Relationship_Management.Models.customer>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "empPayroll";
+    Layout = "/Views/Shared/_Admin.cshtml";
+    if (Session["UserName"] == null)
+    {
+        Response.Redirect("~/Admin/Login");
+    }
+}
+
+<h2>Dashboard</h2>
+@Html.AntiForgeryToken()
+<div class="btn btn-group-vertical">
+    <input type="button" class="btn btn-primary btn-lg" value="Payroll" onclick="window.location= '@Url.Action( "Payroll", "Admin")'" />
+    
+    <input type="button" class="btn btn-primary btn-lg" value="Delete Employee Id" onclick="window.location= '@Url.Action( "Payrollinfo", "Admin")'" />
+</div>
+<div class="pull-right">
+
+</div>

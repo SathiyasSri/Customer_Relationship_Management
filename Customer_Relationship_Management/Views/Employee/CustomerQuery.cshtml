@@ -1,0 +1,83 @@
+﻿@model PagedList.IPagedList<Customer_Relationship_Management.Models.query>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "CustomerQuery";
+    Layout = "/Views/Shared/_Employee.cshtml";
+    if (Session["UserName"] == null)
+    {
+        Response.Redirect("~/Login/Login");
+    }
+}
+@using (Html.BeginForm("CustomerQuery", "Employee", FormMethod.Get))
+{
+    @Html.AntiForgeryToken()
+    <b> Search by</b>
+    @Html.RadioButton("Search_Data", "Name", true)<b>CustomerName</b>
+    @Html.RadioButton("Search_Data", "CustomerId") <b> CustomerId</b>
+    <br />
+    <p>
+        Enter Name/ID: &nbsp;&nbsp;@Html.TextBox("Search")
+        <input type="submit" value="Find" class="btn btn-primary" />
+        <input type="button" value="ViewAll" class="btn btn-primary" onclick="window.location= '@Url.Action( "Dashboard", "Employee")'" />
+    </p>
+
+
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("CustomerId", "CustomerQuery", new { Sorting_Order = ViewBag.CustomerId, Filter_Value = ViewBag.FilterValue })
+        </th>
+
+        <th>
+            @Html.ActionLink("EmployeeId", "CustomerQuery", new { Sorting_Order = ViewBag.SortingEmployeeId, Filter_Value = ViewBag.FilterValue })
+
+        </th>
+
+        <th>
+            @Html.ActionLink("Qsubject", "CustomerQuery", new { Sorting_Order = ViewBag.SortingQsubject, Filter_Value = ViewBag.FilterValue })
+        </th>
+
+        <th>
+            @Html.ActionLink("Qmessage", "CustomerQuery", new { Sorting_Order = ViewBag.SortingQmessage, Filter_Value = ViewBag.FilterValue })
+        </th>
+
+        <th>
+            @Html.ActionLink("custEmail", "CustomerQuery", new { Sorting_Order = ViewBag.SortingcustEmail, Filter_Value = ViewBag.FilterValue })
+        </th>
+
+        <th>
+            @Html.ActionLink("Queryno", "CustomerQuery", new { Sorting_Order = ViewBag.SortingQueryno, Filter_Value = ViewBag.FilterValue })
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.custId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Qsubject)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Qmessage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.custEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Queryno)
+            </td>
+        </tr>
+    }
+</table>
+
+Page@(Model.PageCount <Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, Page_No => Url.Action("CustomerQuery", new { Page_No, Sorting_Order = ViewBag.CurrentSortOrder, Filter_Value = ViewBag.FilterValue }))
+@Html.ActionLink("Back to Dashboard", "Dashboard")
